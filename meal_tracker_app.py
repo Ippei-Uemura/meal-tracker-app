@@ -61,7 +61,7 @@ if page == "🤖 メニュー提案":
     st.markdown("#### 🥦 食材を選んでください")
     selected_ingredients = st.multiselect("", ingredient_master)
 
-    st.markdown("#### ✍️ 自由食材・調味料（カンマ区切り）")
+    st.markdown("#### ✍️ 自由食材・調味料（A,B）")
     free_input = st.text_input("")
 
     all_inputs = selected_ingredients + [i.strip() for i in free_input.replace("、", ",").split(",") if i.strip()]
