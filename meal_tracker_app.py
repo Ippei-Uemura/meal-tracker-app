@@ -33,7 +33,7 @@ def score_recipe(input_ings, recipe_ings_str):
     return score
 
 if page == "🤖 メニュー提案":
-    st.title("🤖 食材からメニュー提案（カテゴリ統合・柔軟マッチ）")
+    st.title("🤖 食材からメニュー提案")
 
     selected_ingredients = st.multiselect("🥦 食材を選んでください", ingredient_master)
     free_input = st.text_input("✍️ 自由食材・調味料（カンマ区切り）")
