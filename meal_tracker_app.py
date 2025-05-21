@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from datetime import date
 
-# 相対パスに変更
+# クラウド対応の相対パス設定
 RECIPE_CSV = "recipes.csv"
 INGREDIENT_CSV = "ingredients.csv"
 LOG_PATH = "daily_log.csv"
@@ -11,7 +11,7 @@ LOG_PATH = "daily_log.csv"
 @st.cache_data
 def load_data():
     if not os.path.exists(RECIPE_CSV) or not os.path.exists(INGREDIENT_CSV):
-        st.error("CSVファイルが見つかりません。レポジトリ直下にファイルがあるか確認してください。")
+        st.error("CSVファイルが見つかりません。ルートディレクトリに 'recipes.csv' と 'ingredients.csv' を配置してください。")
         st.stop()
     recipes = pd.read_csv(RECIPE_CSV, encoding="utf-8-sig")
     ingredients = pd.read_csv(INGREDIENT_CSV, encoding="utf-8-sig")
@@ -33,7 +33,7 @@ def score_recipe(input_ings, recipe_ings_str):
     return score
 
 if page == "🤖 メニュー提案":
-    st.title("🤖 食材からメニュー提案")
+    st.title("🤖 食材からメニュー提案（健康対応・治療配慮済み）")
 
     selected_ingredients = st.multiselect("🥦 食材を選んでください", ingredient_master)
     free_input = st.text_input("✍️ 自由食材・調味料（カンマ区切り）")
