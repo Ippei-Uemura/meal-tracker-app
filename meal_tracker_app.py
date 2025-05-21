@@ -3,15 +3,40 @@ import pandas as pd
 import os
 from datetime import date
 
-# クラウド対応の相対パス設定
+# CSVファイルの相対パス（Streamlit Cloud対応）
 RECIPE_CSV = "recipes.csv"
 INGREDIENT_CSV = "ingredients.csv"
 LOG_PATH = "daily_log.csv"
 
+# UI用CSSスタイル
+st.markdown(
+    """
+    <style>
+    .title-custom {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        padding: 0.5em;
+        color: #ffffff;
+    }
+    .subtext {
+        text-align: center;
+        font-size: 14px;
+        color: #cccccc;
+        margin-bottom: 20px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# タイトルの表示
+st.markdown('<div class="title-custom">🤖 食材からのメニュー提案</div>', unsafe_allow_html=True)
+
 @st.cache_data
 def load_data():
     if not os.path.exists(RECIPE_CSV) or not os.path.exists(INGREDIENT_CSV):
-        st.error("CSVファイルが見つかりません。ルートディレクトリに 'recipes.csv' と 'ingredients.csv' を配置してください。")
+        st.error("CSVファイルが見つかりません。ルートディレクトリに配置してください。")
         st.stop()
     recipes = pd.read_csv(RECIPE_CSV, encoding="utf-8-sig")
     ingredients = pd.read_csv(INGREDIENT_CSV, encoding="utf-8-sig")
@@ -33,10 +58,12 @@ def score_recipe(input_ings, recipe_ings_str):
     return score
 
 if page == "🤖 メニュー提案":
-    st.title("🤖 食材からメニュー提案")
+    st.markdown("#### 🥦 食材を選んでください")
+    selected_ingredients = st.multiselect("", ingredient_master)
 
-    selected_ingredients = st.multiselect("🥦 食材を選んでください", ingredient_master)
-    free_input = st.text_input("✍️ 自由食材・調味料（カンマ区切り）")
+    st.markdown("#### ✍️ 自由食材・調味料（カンマ区切り）")
+    free_input = st.text_input("")
+
     all_inputs = selected_ingredients + [i.strip() for i in free_input.replace("、", ",").split(",") if i.strip()]
 
     if st.button("💡 メニューを提案"):
