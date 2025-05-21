@@ -3,15 +3,15 @@ import pandas as pd
 import os
 from datetime import date
 
-# ✅ 相対パスに修正
-RECIPE_CSV = "recipes_db_utf8bom_complete.csv"
-INGREDIENT_CSV = "ingredients_db_clinically_filtered_utf8bom.csv"
+# 相対パスに変更
+RECIPE_CSV = "recipes.csv"
+INGREDIENT_CSV = "ingredients.csv"
 LOG_PATH = "daily_log.csv"
 
 @st.cache_data
 def load_data():
     if not os.path.exists(RECIPE_CSV) or not os.path.exists(INGREDIENT_CSV):
-        st.error("CSVファイルが見つかりません。リポジトリ直下にファイルがあるか確認してください。")
+        st.error("CSVファイルが見つかりません。レポジトリ直下にファイルがあるか確認してください。")
         st.stop()
     recipes = pd.read_csv(RECIPE_CSV, encoding="utf-8-sig")
     ingredients = pd.read_csv(INGREDIENT_CSV, encoding="utf-8-sig")
