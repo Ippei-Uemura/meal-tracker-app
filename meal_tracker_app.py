@@ -13,7 +13,7 @@ st.markdown(
     """
     <style>
     .title-custom {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: bold;
         text-align: center;
         padding: 0.5em;
@@ -21,9 +21,9 @@ st.markdown(
     }
     .subtext {
         text-align: center;
-        font-size: 14px;
+        font-size: 10px;
         color: #cccccc;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
     </style>
     """,
